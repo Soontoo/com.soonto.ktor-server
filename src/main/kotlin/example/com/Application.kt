@@ -8,7 +8,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    //configureSockets()
+    configureSockets()
     configureSerialization()
     configureDatabases()
     configureHTTP()

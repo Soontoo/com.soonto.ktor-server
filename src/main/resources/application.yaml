@@ -4,3 +4,8 @@ ktor:
             - example.com.ApplicationKt.module
     deployment:
         port: 3000
+    environment:
+        db_name: $DB_NAME
+        db_password: $DB_PASSWORD
+        db_url: $DB_URL
+

@@ -1,4 +1,4 @@
-package example.com.plugins
+package example.com.plugins.database
 
 import kotlinx.coroutines.*
 import kotlinx.serialization.Serializable

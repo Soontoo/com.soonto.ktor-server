@@ -24,7 +24,7 @@ fun Application.configureRouting() {
             description = "Example API for testing and demonstration purposes."
         }
         server {
-            url = "http://localhost:8080"
+            url = "http://localhost:3000"
             description = "Development Server"
         }
     }

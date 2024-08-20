@@ -89,6 +89,7 @@ fun Application.connectToPostgres(embedded: Boolean): Connection {
         val url = environment.config.property("ktor.environment.db_url").getString()
         val user = environment.config.property("ktor.environment.db_name").getString()
         val password = environment.config.property("ktor.environment.db_password").getString()
+        println(url+  user+  password)
 
         return DriverManager.getConnection(url, user, password)
     }

@@ -14,6 +14,7 @@ fun Application.configureRouting() {
         path = "/webjars" //defaults to /webjars
     }
     install(SwaggerUI) {
+
         swagger {
             swaggerUrl = "swagger-ui"
             forwardRoot = true
@@ -24,8 +25,8 @@ fun Application.configureRouting() {
             description = "Example API for testing and demonstration purposes."
         }
         server {
-            url = "http://localhost:3000"
-            description = "Development Server"
+            url = "http://5.35.101.236"
+            description = "Remote server"
         }
     }
     routing {

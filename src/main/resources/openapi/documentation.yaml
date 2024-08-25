@@ -4,7 +4,14 @@ info:
   description: "Application API"
   version: "1.0.0"
 servers:
-  - url: "http://0.0.0.0:2000"
+  - url: '{SERVER_URL}'
+    variables:
+      SERVER_URL:
+        description: Environment - staging or production
+        default: http://127.0.0.1:2001
+        enum:
+          - http://127.0.0.1:2001
+          - http://5.35.101.236
 paths:
   /:
     get:
@@ -19,5 +26,26 @@ paths:
               examples:
                 Example#1:
                   value: "Hello World!"
+  /askGpt:
+    post:
+      description: "Ask GPT"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              Example#1:
+                value: "Какой язык программирования самый лучший?"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Python"
 components:
   schemas: {}

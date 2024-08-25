@@ -9,6 +9,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    AppConfig.initialize(this.environment)
     configureSockets()
     configureSerialization()
     configureDatabases()

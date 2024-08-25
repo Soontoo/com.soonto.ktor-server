@@ -1,5 +1,9 @@
 package example.com.plugins.database
 
+import example.com.AppConfig
+import example.com.plugins.repositories.Result
+import example.com.plugins.repositories.YandexGptRepository
+import example.com.plugins.yandexGptApi.yandexGptApi
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -11,6 +15,7 @@ import kotlinx.coroutines.*
 fun Application.configureDatabases() {
     val dbConnection: Connection = connectToPostgres(embedded = false)
     val usersService = UsersSchema(dbConnection)
+    val repository = YandexGptRepository(yandexGptApi)
     
     routing {
 
@@ -24,39 +29,16 @@ fun Application.configureDatabases() {
             val id = usersService.create(user)
             call.respond(HttpStatusCode.Created, id)
         }
-    
-//        // Create city
-//        post("/cities") {
-//            val city = call.receive<City>()
-//            val id = usersService.create(city)
-//            call.respond(HttpStatusCode.Created, id)
-//        }
-//
-//        // Read city
-//        get("/cities/{id}") {
-//            val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-//            try {
-//                val city = usersService.read(id)
-//                call.respond(HttpStatusCode.OK, city)
-//            } catch (e: Exception) {
-//                call.respond(HttpStatusCode.NotFound)
-//            }
-//        }
-//
-//        // Update city
-//        put("/cities/{id}") {
-//            val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-//            val user = call.receive<City>()
-//            usersService.update(id, user)
-//            call.respond(HttpStatusCode.OK)
-//        }
-//
-//        // Delete city
-//        delete("/cities/{id}") {
-//            val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-//            usersService.delete(id)
-//            call.respond(HttpStatusCode.OK)
-//        }
+
+        post("/askGpt"){
+            val question = call.receive<String>()
+            when(val answer = repository.sentQuestion(question)) {
+                is Result.Success -> call.respond(HttpStatusCode.OK, answer.data)
+                is Result.Error -> call.respond(HttpStatusCode.InternalServerError, answer.error)
+            }
+
+        }
+
     }
 }
 
@@ -86,9 +68,9 @@ fun Application.connectToPostgres(embedded: Boolean): Connection {
     if (embedded) {
         return DriverManager.getConnection("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1", "root", "")
     } else {
-        val url = environment.config.property("ktor.environment.db_url").getString()
-        val user = environment.config.property("ktor.environment.db_name").getString()
-        val password = environment.config.property("ktor.environment.db_password").getString()
+        val url = AppConfig.databaseUrl
+        val user = AppConfig.databaseUser
+        val password = AppConfig.databasePassword
         println(url+  user+  password)
 
         return DriverManager.getConnection(url, user, password)

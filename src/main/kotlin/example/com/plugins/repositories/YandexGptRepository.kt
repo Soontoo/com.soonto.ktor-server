@@ -5,14 +5,22 @@ import example.com.plugins.yandexGptApi.RequestMessage
 import example.com.plugins.yandexGptApi.RequestModel
 
 
-class YandexGptRepository(private val yandexGptApi: YandexGptService) {
-    suspend fun sentQuestion(question: String): Result<String> {
-        return handleRequestError {
-            yandexGptApi.sendMessage(
-                RequestModel(messages = listOf(RequestMessage(text = question)))
-            ).result.alternatives.joinToString {
-                it.message.text
-            }
+suspend fun YandexGptService.sendQuestion(question: String): Result<String> {
+    return handleRequestError {
+        sendMessage(RequestModel(messages = listOf(RequestMessage(text = question)))).result.alternatives.joinToString {
+            it.message.text
         }
     }
 }
+
+//class YandexGptRepository(private val yandexGptApi: YandexGptService) {
+//    suspend fun sentQuestion(question: String): Result<String> {
+//        return handleRequestError {
+//            yandexGptApi.sendMessage(
+//                RequestModel(messages = listOf(RequestMessage(text = question)))
+//            ).result.alternatives.joinToString {
+//                it.message.text
+//            }
+//        }
+//    }
+//}

@@ -1,0 +1,7 @@
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "telegramId": 123456789,
+  "isBot": false,
+  "question": "What is your favorite color?"
+}

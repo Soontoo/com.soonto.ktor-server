@@ -1,7 +1,8 @@
 package example.com
 
 import example.com.plugins.*
-import example.com.plugins.database.configureDatabases
+import example.com.plugins.database.initTables
+import example.com.plugins.rest.configureGptREST
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -10,11 +11,13 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     AppConfig.initialize(this.environment)
+    initTables()
     configureSockets()
     configureSerialization()
-    configureDatabases()
+    configureGptREST()
     configureHTTP()
     configureSecurity()
     configureRouting()
     includeCORS()
+    configureGptREST()
 }

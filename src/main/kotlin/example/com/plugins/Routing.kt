@@ -30,7 +30,7 @@ fun Application.configureRouting() {
     routing {
         swaggerUI(path = "/swagger-ui", swaggerFile = "openapi/documentation.yaml")
         get("/") {
-            call.respondText("Hello World!")
+            call.respondText("Hello World!", contentType = ContentType.Text.Plain)
         }
         get("/webjars") {
             call.respondText("<script src='/webjars/jquery/jquery.js'></script>", ContentType.Text.Html)

@@ -12,23 +12,23 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.transactions.transaction
 
 
 @Serializable
 data class AnswerResponse(val answer: String)
+
 fun Application.configureGptREST() {
     withDB {
         routing {
             post("/askGpt") {
                 val model = call.receive<QuestionModel>()
                 when (val answer = yandexGptApi.sendQuestion(model.question)) {
-                //when (val answer = Result.Success("testAnswer")) {
+                    //when (val answer = Result.Success("testAnswer")) {
                     is Result.Success -> {
                         saveAnswer(answer.data, model)
                         call.respond(HttpStatusCode.OK, AnswerResponse(answer.data))
                     }
+
                     is Result.Error -> call.respond(HttpStatusCode.InternalServerError, answer.error)
                 }
             }
@@ -36,7 +36,7 @@ fun Application.configureGptREST() {
     }
 }
 
-private suspend inline fun Database.saveAnswer(answer: String, model: QuestionModel) {
+private inline fun Database.saveAnswer(answer: String, model: QuestionModel) {
     withUserSchema(
         block = {
             withAnswerSchema(

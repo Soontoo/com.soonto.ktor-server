@@ -13,8 +13,8 @@ data class Answer(
 )
 
 object Answers : IntIdTable() {
-    val answer = varchar("answer", 255)
-    val question = varchar("question", 255)
+    val answer = text("answer")
+    val question = text("question")
     val userId = integer("user_id").references(Users.id) // Внешний ключ, ссылающийся на таблицу Users
     val data = long("data") // Поле для хранения даты и времени
 }

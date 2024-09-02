@@ -1,4 +1,4 @@
-package example.com.plugins.yandexGptApi
+package example.com.plugins.data.yandexGptApi
 
 import example.com.plugins.network.RetrofitProvider
 import example.com.plugins.network.YandexGptService

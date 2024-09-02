@@ -47,5 +47,33 @@ paths:
               examples:
                 Example#1:
                   value: "Python"
+
+  /savwAnswer:
+    post:
+      description: "Save answer"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: {
+                "firstName": "John",
+                "lastName": "Doe",
+                "telegramId": 123456789,
+                "isBot": false,
+                "question": "What is your favorite color?"
+              }
+            examples:
+              Example#1:
+                value: "Какой язык программирования самый лучший?"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Python"
 components:
   schemas: {}

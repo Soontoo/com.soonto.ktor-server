@@ -1,10 +1,10 @@
-package example.com.plugins.yandexGptApi
+package example.com.plugins.data.yandexGptApi
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseModel(
+data class ChatGtpResponseModel(
     val result: Result
 )
 

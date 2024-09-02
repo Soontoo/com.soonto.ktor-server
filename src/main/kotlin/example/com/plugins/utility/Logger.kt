@@ -27,3 +27,5 @@ private class FileLogger : Logger {
 }
 
 val AppLogger: Logger = ConsoleLogger()
+
+fun printlnRED(message: String) = println("\u001B[31m$message\u001B[0m")

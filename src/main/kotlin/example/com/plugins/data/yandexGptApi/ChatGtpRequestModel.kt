@@ -1,10 +1,10 @@
-package example.com.plugins.yandexGptApi
+package example.com.plugins.data.yandexGptApi
 
 import example.com.AppConfig
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RequestModel(
+data class ChatGtpRequestModel(
     val modelUri: String = "gpt://${AppConfig.yandexFolderId}/yandexgpt-lite",
     val completionOptions: CompletionOptions = CompletionOptions(stream = false, temperature = 0.1, maxTokens = "1000"),
     val messages: List<RequestMessage>

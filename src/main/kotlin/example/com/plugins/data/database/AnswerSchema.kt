@@ -1,4 +1,4 @@
-package example.com.plugins.database
+package example.com.plugins.data.database
 
 import example.com.plugins.utility.AppLogger
 import org.jetbrains.exposed.dao.id.IntIdTable

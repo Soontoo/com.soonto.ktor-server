@@ -3,7 +3,7 @@ ktor:
         modules:
             - example.com.ApplicationKt.module
     deployment:
-        port: 2001
+        port: 2002
     environment:
         db_name: $DB_NAME
         db_password: $DB_PASSWORD

@@ -3,11 +3,13 @@ package example.com.plugins.rest
 import example.com.plugins.data.repositories.Result
 import example.com.plugins.domain.withYandexInteractor
 import example.com.plugins.rest.models.QuestionModel
+import example.com.plugins.wsSessionsConnections
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.websocket.*
 import kotlinx.serialization.Serializable
 
 
@@ -56,8 +58,14 @@ fun Application.configureGptREST() {
                     )
                 }
             }
+            post("/writeToTftScreen") {
+                val model = call.receive<QuestionModel>()
+                wsSessionsConnections.forEach {
+                    it.outgoing.send(Frame.Text(model.question))
+                }
+                call.respond(HttpStatusCode.OK)
+            }
         }
     }
-
 }
 

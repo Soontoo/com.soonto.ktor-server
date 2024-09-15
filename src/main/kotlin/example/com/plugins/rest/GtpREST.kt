@@ -59,9 +59,9 @@ fun Application.configureGptREST() {
                 }
             }
             post("/writeToTftScreen") {
-                val model = call.receive<QuestionModel>()
+                val model = call.receive<String>()
                 wsSessionsConnections.forEach {
-                    it.outgoing.send(Frame.Text(model.question))
+                    it.outgoing.send(Frame.Text(model))
                 }
                 call.respond(HttpStatusCode.OK)
             }

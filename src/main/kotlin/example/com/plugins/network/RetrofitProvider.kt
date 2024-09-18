@@ -7,9 +7,16 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+
+
+private const val TIMEOUT_SECOND = 30L
 
 object RetrofitProvider {
-    private val client = OkHttpClient.Builder().addInterceptor(HeaderInterceptor()).build()
+    private val client =
+        OkHttpClient.Builder().addInterceptor(HeaderInterceptor()).connectTimeout(TIMEOUT_SECOND, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_SECOND, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_SECOND, TimeUnit.SECONDS).build()
     val get: Retrofit by lazy {
         Retrofit.Builder().client(client)
             .baseUrl("https://llm.api.cloud.yandex.net")

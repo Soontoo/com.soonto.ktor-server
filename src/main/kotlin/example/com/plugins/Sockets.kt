@@ -45,7 +45,9 @@ fun Application.configureSockets() {
             wsSessionsConnections.add(this)
             try {
                 for (frame in incoming) {
+                    println("Frame type: ${frame.frameType}")
                     println(frame.data)
+                    println(frame.data.size)
                 }
             } finally {
                 // Удаляем соединение при закрытии

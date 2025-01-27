@@ -3,6 +3,8 @@ package example.com.plugins.rest
 import example.com.plugins.data.repositories.Result
 import example.com.plugins.domain.withYandexInteractor
 import example.com.plugins.rest.models.QuestionModel
+import example.com.plugins.rest.models.WebCardModel
+import example.com.plugins.rest.models.WebcardResponse
 import example.com.plugins.utility.printlnRED
 import example.com.plugins.wsSessionsConnections
 import io.ktor.http.*
@@ -88,6 +90,13 @@ fun Application.configureGptREST() {
             photoRawFlow.emit(photo)
             File("src/main/resources/images/sendingPhoto.jpg").writeBytes(photo)
             call.respond(HttpStatusCode.OK)
+        }
+        get("/getWebCardList"){
+            call.respond(HttpStatusCode.OK, WebcardResponse(listOf(
+                WebCardModel("test", "test", "test"),
+                WebCardModel("test2", "test2", "test2"),
+                WebCardModel("test3", "test3", "test3")
+            )))
         }
     }
 }

@@ -33,7 +33,10 @@ fun Application.configureRouting() {
     }
     routing {
         singlePageApplication{
-            react("src/main/kotlin/example/com/web")
+//            react("src/main/kotlin/example/com/web")
+            useResources = true
+            filesPath = "web"
+            defaultPage = "index.html"
         }
         swaggerUI(path = "/swagger-ui", swaggerFile = "openapi/documentation.yaml")
         get("/webjars") {

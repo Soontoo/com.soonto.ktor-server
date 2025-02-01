@@ -26,6 +26,7 @@ repositories {
 
 dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("io.ktor:ktor-network-tls-certificates:2.3.12")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
     implementation("io.ktor:ktor-server-cors:2.3.12")

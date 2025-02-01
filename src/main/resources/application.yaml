@@ -11,4 +11,11 @@ ktor:
         yandex_iam_token: $IAM_TOKEN
         yandex_folder_id: $FOLDER_ID
         server_url: $SERVER_URL
+    security:
+        ssl:
+            keyStore: keystore.jks
+            keyAlias: $KEY_ALIAS
+            keyStorePassword: $KEYSTORE_PASSWORD
+            privateKeyPassword: $KEY_PASSWORD
+
 

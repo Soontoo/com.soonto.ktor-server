@@ -10,8 +10,7 @@ import io.ktor.server.routing.*
 fun Application.configureSerialization() {
     install(ContentNegotiation) {
         json()
-        gson {
-            }
+        gson {}
     }
     routing {
         get("/json/kotlinx-serialization") {

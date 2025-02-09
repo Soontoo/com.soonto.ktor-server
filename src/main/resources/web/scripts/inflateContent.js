@@ -1,6 +1,6 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://127.0.0.1:2002/getWebCardList')
+    fetch('https://127.0.0.1:8443/getWebCardList')
         .then(response => response.json())
         .then(data => {
             createCardList(data.cards);

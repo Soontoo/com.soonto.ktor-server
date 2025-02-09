@@ -1,20 +1,32 @@
 package example.com
 
-import io.ktor.server.application.*
-
-object AppConfig{
-    fun initialize(environment: ApplicationEnvironment){
-        databaseUrl = environment.config.property("ktor.environment.db_url").getString()
-        databaseUser = environment.config.property("ktor.environment.db_name").getString()
-        databasePassword = environment.config.property("ktor.environment.db_password").getString()
-        yandexIAMToken = environment.config.property("ktor.environment.yandex_iam_token").getString()
-        yandexFolderId = environment.config.property("ktor.environment.yandex_folder_id").getString()
-        serverUrl = environment.config.property("ktor.environment.server_url").getString()
+object AppConfig {
+    fun initialize() {
+        databaseUrl = System.getenv("DB_URL")
+        databaseUser = System.getenv("DB_NAME")
+        databasePassword = System.getenv("DB_PASSWORD")
+        yandexIAMToken = System.getenv("IAM_TOKEN")
+        yandexFolderId = System.getenv("FOLDER_ID")
+        serverUrl = System.getenv("SERVER_URL")
+//        keyStore = System.getenv("KEYSTORE")
+        keyAlias = System.getenv("KEY_ALIAS")
+        keyStorePassword = System.getenv("KEYSTORE_PASSWORD")
+        privateKeyPassword = System.getenv("KEY_PASSWORD")
+        privateKeyPassword = System.getenv("KEY_PASSWORD")
+        port =  System.getenv("PORT")
+        sslPort =  System.getenv("SSL_PORT")
     }
+
     lateinit var databaseUrl: String
     lateinit var databaseUser: String
     lateinit var databasePassword: String
     lateinit var yandexIAMToken: String
     lateinit var yandexFolderId: String
     lateinit var serverUrl: String
+//    lateinit var keyStore: String
+    lateinit var keyAlias: String
+    lateinit var keyStorePassword: String
+    lateinit var privateKeyPassword: String
+    lateinit var port: String
+    lateinit var sslPort: String
 }

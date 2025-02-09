@@ -4,9 +4,10 @@ import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import io.ktor.websocket.*
-import java.time.Duration
 import kotlin.math.ceil
 import kotlin.math.min
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 
 fun splitIntoPackets(data: ByteArray, packetSize: Int): List<ByteArray> {
@@ -35,8 +36,8 @@ fun Application.configureSockets() {
 
 
     install(WebSockets) {
-        pingPeriod = Duration.ofSeconds(15)
-        timeout = Duration.ofSeconds(15)
+        pingPeriod = 15.toDuration(DurationUnit.SECONDS)
+        timeout = 15.toDuration(DurationUnit.SECONDS)
         maxFrameSize = Long.MAX_VALUE
         masking = false
     }

@@ -21,4 +21,6 @@
 FROM amazoncorretto:22 AS runtime
 RUN mkdir /app
 COPY /build/libs/*.jar /app/ktor-server.jar
+COPY keystore.jks /app/keystore.jks
+RUN ls -l /app
 ENTRYPOINT ["java","-jar","/app/ktor-server.jar"]

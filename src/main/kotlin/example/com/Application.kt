@@ -14,6 +14,7 @@ import java.security.KeyStore
 
 fun main() {
     AppConfig.initialize()
+    println(AppConfig.port)
     embeddedServer(Netty, port = AppConfig.port.toInt()) {
         routing {
             get("/*") {
@@ -43,13 +44,13 @@ fun main() {
 
 private fun ApplicationEngine.Configuration.envConfig() {
 
-    val keyStoreFile = File("keystore.jks")
+    val keyStoreFile = File("/app/keystore.jks")
     sslConnector(
-        keyStore = KeyStore.getInstance(File("keystore.jks"), AppConfig.keyStorePassword.toCharArray()),
+        keyStore = KeyStore.getInstance(keyStoreFile, AppConfig.keyStorePassword.toCharArray()),
         keyAlias = "sampleAlias",
         keyStorePassword = { AppConfig.keyStorePassword.toCharArray() },
         privateKeyPassword = { AppConfig.keyStorePassword.toCharArray() }) {
-        port = 8443
+        port = AppConfig.sslPort.toInt()
         keyStorePath = keyStoreFile
     }
 }

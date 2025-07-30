@@ -37,3 +37,5 @@ out/
 docker.env
 build/
 keystore.jks
+exported_cert.pem
+mykeystore.p12

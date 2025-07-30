@@ -92,15 +92,14 @@ fun Application.configureGptREST() {
             call.respond(HttpStatusCode.OK)
         }
         get("/getWebCardList"){
-            call.respond(HttpStatusCode.OK, WebcardResponse(listOf(
-                WebCardModel("test", "test", "test"),
-                WebCardModel("test2", "test2", "test2"),
-                WebCardModel("test3", "test3", "test3")
-            )))
+            call.respond(HttpStatusCode.OK, WebcardResponse(listWebCard))
         }
     }
 }
 
+val listWebCard = mutableListOf(WebCardModel("test", "test", "test")).apply{
+    repeat(10) { add(WebCardModel("test$it", "test$it",  "test$it")) }
+}
 val photoRawFlow = MutableSharedFlow<ByteArray>()
 
 val decodeString =

@@ -31,22 +31,27 @@ body {
   width: 300px;
   overflow: hidden;
   margin: 20px;
+  padding: 10px;
 }
 .card:hover {
   background-color: rgb(188, 197, 197);
 }
 
 .card img {
+
   width: 100%;
   height: auto;
 }
 
 .card-content {
+
   padding: 20px;
+  display: flex;
 }
 
 .card-title {
   font-size: 1.5em;
+  display: flex;
   margin: 0;
 }
 

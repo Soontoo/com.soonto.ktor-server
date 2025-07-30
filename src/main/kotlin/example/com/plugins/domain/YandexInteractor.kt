@@ -10,7 +10,6 @@ import example.com.plugins.rest.models.toAnswer
 import example.com.plugins.rest.models.toUser
 import example.com.plugins.utility.AppLogger
 import example.com.plugins.utility.math.countCosineDistance
-import example.com.plugins.utility.printlnRED
 import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 
@@ -22,6 +21,7 @@ class YandexInteractor(private val repo: IYandexGptRepository = YandexGptReposit
         val response =
             repo.getEmbedding(question.question).mapModel { Embedding.fromGetEmbeddingResponse(it, question) }
         if (response is Result.Success) {
+            AppLogger.log("Embedding: " + response.data.toString())
             withDB {
                 withUserSchema(
                     block = {
@@ -86,7 +86,7 @@ private fun YandexInteractor.findMostSimilarEmbedding(
             embedding.scalar,
             questionEmbedding.scalar
         )
-        printlnRED("Distance: $distance   " + embedding.text)
+        AppLogger.log("Distance: $distance   " + embedding.text)
         if (minDistance > distance) {
             minDistance = distance
             candidate = embedding

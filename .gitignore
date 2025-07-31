@@ -39,3 +39,5 @@ build/
 keystore.jks
 exported_cert.pem
 mykeystore.p12
+cert.pem
+openssl.cnf
